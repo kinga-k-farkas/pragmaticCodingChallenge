@@ -26,6 +26,7 @@ def requestPrecisionValue():
         precisionRequest = \
         input("Input the number of decimal places to be used for the calculations. To skip, type Skip: ")
         if precisionRequest == "Skip":
+            print("Using the default configuration of 2 decimal places for the calculations.")
             decimalPlaceCount = 2
             break
         else:
@@ -50,14 +51,12 @@ def checkPrecisionValue(value):
         print("The number of decimal places you requested is not feasible on your computer. Try again.")
         return checkPrecisionValue(requestPrecisionValue())
     else:
-        print("All set.")
-        print(value)
         return value
 
 
 def calculateStats(inputArray, decimalPlaces):
     """calculates and  mean, standard deviation and median of an 1 dimensional numpy array of longdoubles to
-    decimalPlaceCount decimal places """
+    decimalPlaces decimal places """
     print(round(np.mean(inputArray), decimalPlaces), round(np.std(inputArray), decimalPlaces),
           round(np.median(inputArray), decimalPlaces))
 
@@ -67,8 +66,8 @@ def calculateStats(inputArray, decimalPlaces):
 print("Configuring accuracy.")
 
 decimalPlaceCount = checkPrecisionValue(requestPrecisionValue())
-print(decimalPlaceCount)
 
+print("\n")
 inputValues = []
 
 print("Please input your list -- one number per line. Type Exit when finished.")
@@ -81,7 +80,6 @@ for line in sys.stdin:
         try:
             num = np.longdouble(line.rstrip())
             inputValues.append(num)
-            print(inputValues)
             calculateStats(inputValues, decimalPlaceCount)
 
         except ValueError:
